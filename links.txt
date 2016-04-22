@@ -16,7 +16,7 @@ http://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Patterns
 [](http://www.unicode.org/reports/tr35/tr35-numbers.html#Currencies)
 [](http://userguide.icu-project.org/formatparse/numbers)
 [](https://ssl.icu-project.org/apiref/icu4c/classDecimalFormat.html)
-[](https://en.wikipedia.org/wiki/List_of_circulating_currencies)
 [](https://github.com/angular/angular.js/blob/master/src/ngLocale/angular-locale_az.js)
 
-http://www.currency-iso.org/dam/downloads/lists/list_one.xml
+ICU Data
+http://download.icu-project.org/files/icu4c/57rc/icu4c-57rc-data.zip

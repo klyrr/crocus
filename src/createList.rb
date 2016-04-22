@@ -26,4 +26,6 @@ doc.xpath('//CcyNtry').each do |e|
   end
 end
 
-File.write(CURRENCY_JSON_FILE_NAME, currencyCode.to_json)
+File.write('dist/' + CURRENCY_JSON_FILE_NAME, currencyCode.to_json)
+
+puts "Success."
