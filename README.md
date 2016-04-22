@@ -12,10 +12,14 @@ In order to have the correct currency patterns in one easy to find place I start
 Usage
 -----
 
-#### run the tests
+#### Run the tests
 
-   rake
+```
+  rake
+```
 
-#### create the a new version of json files
+#### Create the a new version of json files
 
-   rake update
+```
+  rake update
+```
