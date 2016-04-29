@@ -33,7 +33,7 @@ var formatNumber = function formatNumber(number, formatPattern) {
   if (numberOfDecimals > 0) {
     var formattedDecimalPart = '';
     if (decimalPart == 0) {
-      formattedDecimalPart = '0'.repeat(numberOfDecimals);
+      formattedDecimalPart = new Array(numberOfDecimals + 1).join('0');
     } else {
       formattedDecimalPart = new String(decimalPart).substr(2).substr(0, numberOfDecimals);
     }
