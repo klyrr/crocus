@@ -1,8 +1,18 @@
 const DECIMAL_SEPARTOR = '.';
 const GROUP_SEPARTOR = ',';
+const ALLOWED_FORMAT_CHARS = ' ¤,#0.'
 
-export const assertValidFormat = (format) => {
-  return true;
+export const isValidFormatPattern = (format) => {
+  const posGroupSeparator = format.indexOf(GROUP_SEPARTOR);
+  const posDecimalSeparator = format.indexOf(DECIMAL_SEPARTOR);
+  if (posDecimalSeparator >= 0 && posDecimalSeparator < posGroupSeparator) {
+    return false;
+  }
+  let formatToBeChecked = format;
+  for (let i = 0; i < ALLOWED_FORMAT_CHARS.length; i++) {
+    formatToBeChecked = formatToBeChecked.replace(new RegExp(ALLOWED_FORMAT_CHARS[i],'g'), '').trim();
+  }
+  return formatToBeChecked.length === 0;
 }
 
 export const getNumberOfDecimals = (format) => {
