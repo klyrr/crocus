@@ -1,4 +1,4 @@
-import {round} from './crocusMath';
+import {round, trunc} from './crocusMath';
 import {getNumberOfDecimals, getSizeOfGroup} from './crocusFormat';
 
 /**
@@ -10,7 +10,7 @@ const formatNumber = (number, formatPattern) => {
   const roundedNumber = round(number, numberOfDecimals);
   const groupSize = getSizeOfGroup(formatPattern.pattern);
 
-  const integerPart = Math.trunc(roundedNumber);
+  const integerPart = trunc(roundedNumber);
   const decimalPart = roundedNumber - integerPart;
 
   let numberAsString = new String(integerPart);

@@ -17,7 +17,7 @@ var formatNumber = function formatNumber(number, formatPattern) {
   var roundedNumber = (0, _crocusMath.round)(number, numberOfDecimals);
   var groupSize = (0, _crocusFormat.getSizeOfGroup)(formatPattern.pattern);
 
-  var integerPart = Math.trunc(roundedNumber);
+  var integerPart = (0, _crocusMath.trunc)(roundedNumber);
   var decimalPart = roundedNumber - integerPart;
 
   var numberAsString = new String(integerPart);
