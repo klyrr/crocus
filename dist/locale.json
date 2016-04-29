@@ -1,8 +1,8 @@
 {
-  'de_DE': {
-    'number_pattern': '#,##0.###',
-    'currency_pattern': '#,##0.00 ¤',
-    'decimal_sep': ',',
-    'group_sep': '.'
+  "de_DE": {
+    "number_pattern": "#,##0.###",
+    "currency_pattern": "#,##0.00 ¤",
+    "decimal_sep": ",",
+    "group_sep": "."
   }
 }

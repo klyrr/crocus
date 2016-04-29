@@ -1,0 +1,20 @@
+{
+    "browser": true,
+    "debug": false,
+    "devel": false,
+    "strict": true,
+    "globalstrict": true,
+    "undef": true,
+    "unused": true,
+    "multistr": true,
+    "scripturl": true,
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "freeze": true,
+    "esnext": true,
+    "predef": [
+        "require",
+        "module"
+    ]
+}

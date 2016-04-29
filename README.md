@@ -12,10 +12,11 @@ In order to have the correct currency patterns in one easy to find place I start
 Usage
 -----
 
-#### Run the tests
+#### Run the tests.
 
 ```
   rake
+  npm test
 ```
 
 #### Create the a new version of json files
@@ -23,3 +24,5 @@ Usage
 ```
   rake update
 ```
+
+#### use the crocus number formattedNumber
