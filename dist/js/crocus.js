@@ -20,7 +20,7 @@ var formatNumber = function formatNumber(number, formatPattern) {
   var integerPart = (0, _crocusMath.trunc)(roundedNumber);
   var decimalPart = roundedNumber - integerPart;
 
-  var numberAsString = new String(integerPart);
+  var numberAsString = String(integerPart);
 
   var length = numberAsString.length;
   var i = length - groupSize;
@@ -32,10 +32,10 @@ var formatNumber = function formatNumber(number, formatPattern) {
 
   if (numberOfDecimals > 0) {
     var formattedDecimalPart = '';
-    if (decimalPart == 0) {
+    if (decimalPart === 0) {
       formattedDecimalPart = new Array(numberOfDecimals + 1).join('0');
     } else {
-      formattedDecimalPart = new String(decimalPart).substr(2).substr(0, numberOfDecimals);
+      formattedDecimalPart = String(decimalPart).substr(2).substr(0, numberOfDecimals);
     }
     numberAsString = numberAsString + formatPattern.decimal_sep + formattedDecimalPart;
   }

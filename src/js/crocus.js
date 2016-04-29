@@ -13,7 +13,7 @@ const formatNumber = (number, formatPattern) => {
   const integerPart = trunc(roundedNumber);
   const decimalPart = roundedNumber - integerPart;
 
-  let numberAsString = new String(integerPart);
+  let numberAsString = String(integerPart);
 
   let length = numberAsString.length;
   let i = length - groupSize;
@@ -25,10 +25,10 @@ const formatNumber = (number, formatPattern) => {
 
   if (numberOfDecimals > 0) {
     let formattedDecimalPart = '';
-    if (decimalPart == 0) {
+    if (decimalPart === 0) {
       formattedDecimalPart = new Array(numberOfDecimals + 1 ).join('0');
     } else {
-      formattedDecimalPart = new String(decimalPart).substr(2).substr(0, numberOfDecimals);
+      formattedDecimalPart = String(decimalPart).substr(2).substr(0, numberOfDecimals);
     }
     numberAsString = numberAsString + formatPattern.decimal_sep + formattedDecimalPart;
   }
