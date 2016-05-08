@@ -1,11 +1,17 @@
 import {round, trunc} from './crocusMath';
-import {getNumberOfDecimals, getSizeOfGroup} from './crocusFormat';
+import {getNumberOfDecimals, getSizeOfGroup, isValidFormatPattern} from './crocusFormat';
+
+const CURRENCY_SYMBOL = '¤';
 
 /**
  * formatPattern = { pattern, decimal_sep, group_sep, symbol }
  * pattern: #,##0.00
  */
 const formatNumber = (number, formatPattern) => {
+  if (!isValidFormatPattern(formatPattern.pattern)) {
+    throw 'Given format is wrong';
+  }
+
   const numberOfDecimals = getNumberOfDecimals(formatPattern.pattern);
   const roundedNumber = round(number, numberOfDecimals);
   const groupSize = getSizeOfGroup(formatPattern.pattern);
@@ -41,6 +47,10 @@ const formatNumber = (number, formatPattern) => {
  * pattern: #,##0.00
  */
 const formatCurrency = (number, formatPattern) => {
+  if (!isValidFormatPattern(formatPattern.pattern)) {
+    throw 'Given format is wrong';
+  }
+
   return formatNumber(number, formatPattern) + ' €';
 }
 

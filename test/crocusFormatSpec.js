@@ -25,8 +25,11 @@ module.exports = {
     assert.equal(isValidFormatPattern('#,##0'), true);
     assert.equal(isValidFormatPattern('¤ #,##0.00;¤ -#,##0.00'), true);
     assert.equal(isValidFormatPattern('¤ #,##,##0.00'), true);
+    assert.equal(isValidFormatPattern(' ¤ #,##,##0.00'), true);
 
+    assert.equal(isValidFormatPattern('f ¤ #,##,##0.00'), false);
     assert.equal(isValidFormatPattern('#.##,##0'), false);
     assert.equal(isValidFormatPattern('#.,##0dds'), false);
+    assert.equal(isValidFormatPattern('#,33.8'), false);
   },
 };
