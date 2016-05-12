@@ -32,6 +32,17 @@ module.exports = {
 
     assert.equal(crocus.formatCurrency('10000000', formatCurrencyPatternForUSD), '$10,000,000.00');
   },
+  'test crocus format currency for negative and positive numbers': function(beforeExit, assert) {
+    const formatCurrencyPattern = {
+      pattern: '#,##0.00 ¤',
+      decimal_sep: ',',
+      group_sep: '.',
+      symbol: '€',
+    };
+
+    assert.equal(crocus.formatCurrency('10000', formatCurrencyPattern), '10.000,00 €');
+    assert.equal(crocus.formatCurrency('-10000', formatCurrencyPattern), '-10.000,00 €');
+  },
   'test crocus format not currency': function(beforeExit, assert) {
     const wrongFormatCurrencyPattern = {
       pattern: '#,##0.00 ¤ l',

@@ -8,10 +8,8 @@ var _crocusMath = require('./crocusMath');
 
 var _crocusFormat = require('./crocusFormat');
 
-var CURRENCY_SYMBOL = '¤';
-
 /**
- * formatPattern = { pattern, decimal_sep, group_sep, symbol }
+ * formatPattern = { pattern, decimal_sep, group_sep }
  * pattern: #,##0.00
  */
 var formatNumber = function formatNumber(number, formatPattern) {
@@ -50,7 +48,7 @@ var formatNumber = function formatNumber(number, formatPattern) {
 };
 
 /**
- * formatPattern = { pattern, decimal_sep, group_sep }
+ * formatPattern = { pattern, decimal_sep, group_sep, symbol }
  * pattern: #,##0.00
  */
 var formatCurrency = function formatCurrency(number, formatPattern) {
@@ -58,7 +56,9 @@ var formatCurrency = function formatCurrency(number, formatPattern) {
     throw 'Given format is wrong';
   }
 
-  return formatNumber(number, formatPattern) + ' €';
+  var formattedNumber = formatNumber(number, formatPattern);
+  var formattedCurrency = (0, _crocusFormat.replaceFormatWithNumber)(formatPattern.pattern, formattedNumber);
+  return formattedCurrency.replace(_crocusFormat.CURRENCY_SYMBOL, formatPattern.symbol);
 };
 
 var crocus = {

@@ -1,10 +1,8 @@
 import {round, trunc} from './crocusMath';
-import {getNumberOfDecimals, getSizeOfGroup, isValidFormatPattern} from './crocusFormat';
-
-const CURRENCY_SYMBOL = '¤';
+import {getNumberOfDecimals, getSizeOfGroup, isValidFormatPattern, replaceFormatWithNumber, CURRENCY_SYMBOL} from './crocusFormat';
 
 /**
- * formatPattern = { pattern, decimal_sep, group_sep, symbol }
+ * formatPattern = { pattern, decimal_sep, group_sep }
  * pattern: #,##0.00
  */
 const formatNumber = (number, formatPattern) => {
@@ -43,7 +41,7 @@ const formatNumber = (number, formatPattern) => {
 }
 
 /**
- * formatPattern = { pattern, decimal_sep, group_sep }
+ * formatPattern = { pattern, decimal_sep, group_sep, symbol }
  * pattern: #,##0.00
  */
 const formatCurrency = (number, formatPattern) => {
@@ -51,7 +49,9 @@ const formatCurrency = (number, formatPattern) => {
     throw 'Given format is wrong';
   }
 
-  return formatNumber(number, formatPattern) + ' €';
+  const formattedNumber = formatNumber(number, formatPattern);
+  let formattedCurrency = replaceFormatWithNumber(formatPattern.pattern, formattedNumber);
+  return formattedCurrency.replace(CURRENCY_SYMBOL, formatPattern.symbol);
 }
 
 const crocus = {

@@ -1,7 +1,15 @@
 const DECIMAL_SEPARTOR = '.';
 const GROUP_SEPARTOR = ',';
-const CURRENCY_SYMBOL = '¤';
-const ALLOWED_NUMBER_FORMAT_CHARS = ',#0;- ' + CURRENCY_SYMBOL;
+export const CURRENCY_SYMBOL = '¤';
+const ALLOWED_NUMBER_FORMAT_CHARS = ',#0;';
+const ALLOWED_GENERAL_FORMAT_CHARS = ALLOWED_NUMBER_FORMAT_CHARS + '- ' + CURRENCY_SYMBOL;
+
+const replaceChars = (pattern, charsToBeReplaced, replacement = '') => {
+  for (let i = 0; i < charsToBeReplaced.length; i++) {
+    pattern = pattern.replace(new RegExp(charsToBeReplaced[i],'g'), replacement).trim();
+  }
+  return pattern;
+}
 
 export const isValidFormatPattern = (format) => {
   format = format.trim();
@@ -18,10 +26,15 @@ export const isValidFormatPattern = (format) => {
   }
   let formatToBeChecked = format;
   formatToBeChecked = formatToBeChecked.replace(/\./g, '').trim();
-  for (let i = 0; i < ALLOWED_NUMBER_FORMAT_CHARS.length; i++) {
-    formatToBeChecked = formatToBeChecked.replace(new RegExp(ALLOWED_NUMBER_FORMAT_CHARS[i],'g'), '').trim();
-  }
+  formatToBeChecked = replaceChars(formatToBeChecked, ALLOWED_GENERAL_FORMAT_CHARS);
   return formatToBeChecked.length === 0 || formatToBeChecked === CURRENCY_SYMBOL;
+}
+
+export const replaceFormatWithNumber = (pattern, formattedNumber) => {
+  pattern = pattern.replace(/\./g, '@').trim();
+  pattern = replaceChars(pattern, ALLOWED_NUMBER_FORMAT_CHARS, '@');
+  pattern = pattern.replace('@', formattedNumber);
+  return pattern.split('@').join('');
 }
 
 export const getNumberOfDecimals = (format) => {

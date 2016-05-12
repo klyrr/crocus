@@ -1,6 +1,7 @@
 const getNumberOfDecimals = require('../dist/js/crocusFormat.js').getNumberOfDecimals;
 const getSizeOfGroup = require('../dist/js/crocusFormat.js').getSizeOfGroup;
 const isValidFormatPattern = require('../dist/js/crocusFormat.js').isValidFormatPattern;
+const replaceFormatWithNumber = require('../dist/js/crocusFormat.js').replaceFormatWithNumber;
 
 module.exports = {
   'test crocus format number': function(beforeExit, assert) {
@@ -31,5 +32,9 @@ module.exports = {
     assert.equal(isValidFormatPattern('#.##,##0'), false);
     assert.equal(isValidFormatPattern('#.,##0dds'), false);
     assert.equal(isValidFormatPattern('#,33.8'), false);
+  },
+  'test crocus replace format with number': function(beforeExit, assert) {
+    assert.equal(replaceFormatWithNumber('#,##0.00', '10.000'), '10.000');
+    assert.equal(replaceFormatWithNumber('#,##0.0000 ¤', '10.000'), '10.000 ¤');
   },
 };

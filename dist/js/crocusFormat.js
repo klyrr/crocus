@@ -5,8 +5,18 @@ Object.defineProperty(exports, "__esModule", {
 });
 var DECIMAL_SEPARTOR = '.';
 var GROUP_SEPARTOR = ',';
-var CURRENCY_SYMBOL = '¤';
-var ALLOWED_NUMBER_FORMAT_CHARS = ',#0;- ' + CURRENCY_SYMBOL;
+var CURRENCY_SYMBOL = exports.CURRENCY_SYMBOL = '¤';
+var ALLOWED_NUMBER_FORMAT_CHARS = ',#0;';
+var ALLOWED_GENERAL_FORMAT_CHARS = ALLOWED_NUMBER_FORMAT_CHARS + '- ' + CURRENCY_SYMBOL;
+
+var replaceChars = function replaceChars(pattern, charsToBeReplaced) {
+  var replacement = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
+
+  for (var i = 0; i < charsToBeReplaced.length; i++) {
+    pattern = pattern.replace(new RegExp(charsToBeReplaced[i], 'g'), replacement).trim();
+  }
+  return pattern;
+};
 
 var isValidFormatPattern = exports.isValidFormatPattern = function isValidFormatPattern(format) {
   format = format.trim();
@@ -23,10 +33,15 @@ var isValidFormatPattern = exports.isValidFormatPattern = function isValidFormat
   }
   var formatToBeChecked = format;
   formatToBeChecked = formatToBeChecked.replace(/\./g, '').trim();
-  for (var i = 0; i < ALLOWED_NUMBER_FORMAT_CHARS.length; i++) {
-    formatToBeChecked = formatToBeChecked.replace(new RegExp(ALLOWED_NUMBER_FORMAT_CHARS[i], 'g'), '').trim();
-  }
+  formatToBeChecked = replaceChars(formatToBeChecked, ALLOWED_GENERAL_FORMAT_CHARS);
   return formatToBeChecked.length === 0 || formatToBeChecked === CURRENCY_SYMBOL;
+};
+
+var replaceFormatWithNumber = exports.replaceFormatWithNumber = function replaceFormatWithNumber(pattern, formattedNumber) {
+  pattern = pattern.replace(/\./g, '@').trim();
+  pattern = replaceChars(pattern, ALLOWED_NUMBER_FORMAT_CHARS, '@');
+  pattern = pattern.replace('@', formattedNumber);
+  return pattern.split('@').join('');
 };
 
 var getNumberOfDecimals = exports.getNumberOfDecimals = function getNumberOfDecimals(format) {
