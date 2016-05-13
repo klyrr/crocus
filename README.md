@@ -4,7 +4,7 @@ Crocus
 [![Build Status](https://travis-ci.org/klyrr/crocus.svg?branch=master)](https://travis-ci.org/klyrr/crocus)
 [![Code Climate](https://codeclimate.com/github/klyrr/crocus/badges/gpa.svg)](https://codeclimate.com/github/klyrr/crocus)
 [![Test Coverage](https://codeclimate.com/github/klyrr/crocus/badges/coverage.svg)](https://codeclimate.com/github/klyrr/crocus/coverage)
-[![Locales](https://img.shields.io/badge/locales-2-red.svg)](https://img.shields.io/badge/locales-2-red.svg)
+[![Locales 161/](https://img.shields.io/badge/locales-2/161-red.svg)](https://img.shields.io/badge/locales-2/161-red.svg)
 
 A collection for localization patterns
 
