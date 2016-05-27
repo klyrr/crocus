@@ -20,3 +20,6 @@ http://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Patterns
 
 ICU Data
 http://download.icu-project.org/files/icu4c/57rc/icu4c-57rc-data.zip
+
+THIS:
+http://cldr.unicode.org/index/downloads/cldr-29

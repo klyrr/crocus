@@ -1,5 +1,5 @@
-import {round, trunc} from './crocusMath';
-import {getNumberOfDecimals, getSizeOfGroup, isValidFormatPattern, replaceFormatWithNumber, CURRENCY_SYMBOL} from './crocusFormat';
+import {round, trunc} from './krokusMath';
+import {getNumberOfDecimals, getSizeOfGroup, isValidFormatPattern, replaceFormatWithNumber, CURRENCY_SYMBOL} from './krokusFormat';
 
 /**
  * formatPattern = { pattern, decimal_sep, group_sep }
@@ -54,9 +54,9 @@ const formatCurrency = (number, formatPattern) => {
   return formattedCurrency.replace(CURRENCY_SYMBOL, formatPattern.symbol);
 }
 
-const crocus = {
+const krokus = {
   formatNumber,
   formatCurrency
 }
 
-export default crocus;
+export default krokus;

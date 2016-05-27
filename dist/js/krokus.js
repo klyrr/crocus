@@ -4,24 +4,24 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _crocusMath = require('./crocusMath');
+var _krokusMath = require('./krokusMath');
 
-var _crocusFormat = require('./crocusFormat');
+var _krokusFormat = require('./krokusFormat');
 
 /**
  * formatPattern = { pattern, decimal_sep, group_sep }
  * pattern: #,##0.00
  */
 var formatNumber = function formatNumber(number, formatPattern) {
-  if (!(0, _crocusFormat.isValidFormatPattern)(formatPattern.pattern)) {
+  if (!(0, _krokusFormat.isValidFormatPattern)(formatPattern.pattern)) {
     throw 'Given format is wrong';
   }
 
-  var numberOfDecimals = (0, _crocusFormat.getNumberOfDecimals)(formatPattern.pattern);
-  var roundedNumber = (0, _crocusMath.round)(number, numberOfDecimals);
-  var groupSize = (0, _crocusFormat.getSizeOfGroup)(formatPattern.pattern);
+  var numberOfDecimals = (0, _krokusFormat.getNumberOfDecimals)(formatPattern.pattern);
+  var roundedNumber = (0, _krokusMath.round)(number, numberOfDecimals);
+  var groupSize = (0, _krokusFormat.getSizeOfGroup)(formatPattern.pattern);
 
-  var integerPart = (0, _crocusMath.trunc)(roundedNumber);
+  var integerPart = (0, _krokusMath.trunc)(roundedNumber);
   var decimalPart = roundedNumber - integerPart;
 
   var numberAsString = String(integerPart);
@@ -52,18 +52,18 @@ var formatNumber = function formatNumber(number, formatPattern) {
  * pattern: #,##0.00
  */
 var formatCurrency = function formatCurrency(number, formatPattern) {
-  if (!(0, _crocusFormat.isValidFormatPattern)(formatPattern.pattern)) {
+  if (!(0, _krokusFormat.isValidFormatPattern)(formatPattern.pattern)) {
     throw 'Given format is wrong';
   }
 
   var formattedNumber = formatNumber(number, formatPattern);
-  var formattedCurrency = (0, _crocusFormat.replaceFormatWithNumber)(formatPattern.pattern, formattedNumber);
-  return formattedCurrency.replace(_crocusFormat.CURRENCY_SYMBOL, formatPattern.symbol);
+  var formattedCurrency = (0, _krokusFormat.replaceFormatWithNumber)(formatPattern.pattern, formattedNumber);
+  return formattedCurrency.replace(_krokusFormat.CURRENCY_SYMBOL, formatPattern.symbol);
 };
 
-var crocus = {
+var krokus = {
   formatNumber: formatNumber,
   formatCurrency: formatCurrency
 };
 
-exports.default = crocus;
+exports.default = krokus;

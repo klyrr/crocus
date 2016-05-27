@@ -1,15 +1,22 @@
 {
-  "name": "crocus",
+  "name": "krokus",
   "version": "0.0.0",
+  "description": "Provider for localization patterns and an according formatter.",
+  "keywords": [
+    "localization",
+    "format",
+    "locale"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/klyrr/crocus.git"
+    "url": "git+https://github.com/klyrr/krokus.git"
   },
   "license": "MIT",
   "scripts": {
     "compile": "babel --optional runtime -d dist/js src/js",
     "test": "expresso test/*",
-    "coverage": "istanbul cover test/*.js ",
+    "coverage": "istanbul cover test/krokusSpec.js ",
+    "help": "istanbul help cover ",
     "coverage2": "CODECLIMATE_REPO_TOKEN=bff652e5dd09553645988a5beb4d917bac6a17736253d5138ce8b9df1edfd0f9 codeclimate-test-reporter < coverage/lcov.info"
   },
   "devDependencies": {
@@ -18,5 +25,17 @@
     "codeclimate-test-reporter": "^0.3.1",
     "expresso": "0.9.0",
     "istanbul": "^0.4.3"
+  },
+  "bugs": {
+    "url": "https://github.com/klyrr/krokus/issues"
+  },
+  "author": "Tina Umlandt",
+  "homepage": "https://github.com/klyrr/krokus#readme",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "semver": "^5.1.0"
   }
 }

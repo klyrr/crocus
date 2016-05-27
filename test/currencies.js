@@ -1,7 +1,7 @@
 const currencyConfig = require('../dist/currency.json');
 const localeConfig = require('../dist/locale.json');
 
-const crocus = require('../dist/js/crocus.js').default;
+const krokus = require('../dist/js/krokus.js').default;
 
 module.exports = {
   'test EUR': function(beforeExit, assert) {
@@ -12,7 +12,7 @@ module.exports = {
       group_sep: localeConfig.de_DE.group_sep,
       symbol: currencyConfig.EUR.symbol,
     };
-    assert.equal(crocus.formatCurrency(10000, format), '10.000,00 EUR');
+    assert.equal(krokus.formatCurrency(10000, format), '10.000,00 EUR');
   },
   'test USD': function(beforeExit, assert) {
     assert.equal(currencyConfig.USD.symbol, 'USD');

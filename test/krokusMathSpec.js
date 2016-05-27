@@ -1,5 +1,5 @@
-const round = require('../dist/js/crocusMath.js').round;
-const trunc = require('../dist/js/crocusMath.js').trunc;
+const round = require('../dist/js/krokusMath.js').round;
+const trunc = require('../dist/js/krokusMath.js').trunc;
 
 module.exports = {
   'test round': function(beforeExit, assert) {
