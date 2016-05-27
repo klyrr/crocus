@@ -10,3 +10,7 @@ end
 task :update do
   ruby "src/createList.rb"
 end
+
+task :update_unicode do
+  ruby "src/createListFromUnicode.rb"
+end

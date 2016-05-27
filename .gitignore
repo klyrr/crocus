@@ -1,3 +1,4 @@
 .bundle
 node_modules/
 coverage
+core.zip
