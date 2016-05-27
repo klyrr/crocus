@@ -19,6 +19,7 @@ Usage
 
 ### Use the krokus formatter
 ```javascript
+const krokus = require('krokus');
 
 const formatCurrencyPattern = {
   pattern: '#,##0.00 ¤',
@@ -28,6 +29,20 @@ const formatCurrencyPattern = {
 };
 
 krokus.formatCurrency(10000, formatCurrencyPattern);
+```
+
+### Access the generated currency and locale settings
+```javascript
+const krokus = require('krokus');
+
+> krokus.locales.de_DE
+{ number_pattern: '#,##0.###',
+  currency_pattern: '#,##0.00 ¤',
+  decimal_sep: ',',
+  group_sep: '.' }
+
+> krokus.currencies.EUR
+{ decimal: '2', symbol: 'EUR' }
 ```
 
 #### Run the tests if the formats are still generating the correct formatted numbers in JS and ruby.
