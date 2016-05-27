@@ -3,8 +3,10 @@ const localeConfig = require('../dist/locale.json');
 
 const krokus = require('../dist/js/krokus.js').default;
 
-module.exports = {
-  'test EUR': function(beforeExit, assert) {
+const assert = require('chai').assert;
+
+describe('Currencies', function() {
+  it('should format EUR for de_DE accordingly.', function(){
     assert.equal(currencyConfig.EUR.symbol, 'EUR');
     const format = {
       pattern: localeConfig.de_DE.currency_pattern,
@@ -13,8 +15,9 @@ module.exports = {
       symbol: currencyConfig.EUR.symbol,
     };
     assert.equal(krokus.formatCurrency(10000, format), '10.000,00 EUR');
-  },
-  'test USD': function(beforeExit, assert) {
-    assert.equal(currencyConfig.USD.symbol, 'USD');
-  }
-};
+  });
+
+  it('should set check the correct USD symbol', function() {
+      assert.equal(currencyConfig.USD.symbol, 'USD');
+  });
+});
