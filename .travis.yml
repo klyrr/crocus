@@ -1,13 +1,18 @@
 rvm:
- - 2.2
-
+- 2.2
 node_js:
-  - "5"
-
+- '5'
 install:
-  - bundle install
-  - npm install
-
+- bundle install
+- npm install
 script:
-  - rake
-  - npm test
+- rake
+- npm test
+deploy:
+  provider: npm
+  api_key:
+    secure: aYqQbsHou1EJuhFqCVyxqbl0blguM+VDuwfcvmrWEGjKX/5fBXnmgZpJkKFeZayj9HR+tH77isqY0cz39fLkEfxxX0mlymSstA1bd5Sby8rg1jOJq6GWYV+MkSitavT6YFVrWNnAntEGUo12wqlwe2sY5COG6VtFCLC0UA7EdiRd/CcXq6NtqubWpasLigfqURBTOqQikEgfRUwnGkI+7gLzNVenPy6vA1Rx5Kk0P/+5a14t2W1ldScr+EK1rRGhD1VOLz7xxz9IZub7ChNRWmNye8ZYhWPh80IHrn10/BPQNIxejcgZxC3VC/4pHKFoyMVPd6jH51ithvGMkOKuK98CsoixNLD6XYTFKjzl6VUgVsPqgeCMVJmypi0t+zkDfh73FXRJt4sIsUusKxllbXZltcLYTQXDV8eN2/3k+eT1/7MB/CPrjW+/ebHjWe+aLeAIiuzH3VuK9y7yJUcA4hOTYigW5Q7N2siyEh8a3a/zdvcsSUQmaBp5ccSCrSoB9nV/xDaYLqb6P2941tg2qsAKKmA8Qa7Qn3zoRdTVDYsp3C4b4u9yunDKEZ7nSt6fgLypa9nkzwsi31u7zZ8ey/PzdM5hDO4Zg0AnWLIwJCxTIwxrTy/08eAGtkxN9m+WKSQSqIkQygVkXfsZEeuBFdzc8ndLqlFqxrzvGIiUkmQ=
+  on:
+    tags: true
+    repo: klyrr/krokus
+    branch: master

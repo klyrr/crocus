@@ -38,8 +38,5 @@
   "main": "index.js",
   "directories": {
     "test": "test"
-  },
-  "dependencies": {
-    "semver": "^5.1.0"
   }
 }
