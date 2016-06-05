@@ -52,14 +52,15 @@ rake
 npm test
 ```
 
-#### Create the a new version of format json files
-
-```
-rake update
-```
-
 #### Generate the krokus number formatter from the es6 files.
 
 ```
 npm run compile
+```
+
+#### Create the an up-to-date version of the json files
+
+```
+rake update_currency
+rake update_locale
 ```
