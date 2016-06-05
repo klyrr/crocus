@@ -13,38 +13,27 @@ var _krokusFormat = require('./krokusFormat');
  * pattern: #,##0.00
  */
 var formatNumber = function formatNumber(number, formatPattern) {
-  if (!(0, _krokusFormat.isValidFormatPattern)(formatPattern.pattern)) {
+  var pattern = formatPattern.pattern;
+  if (!(0, _krokusFormat.isValidFormatPattern)(pattern)) {
     throw 'Given format is wrong';
   }
 
-  var numberOfDecimals = (0, _krokusFormat.getNumberOfDecimals)(formatPattern.pattern);
-  var roundedNumber = (0, _krokusMath.round)(number, numberOfDecimals);
-  var groupSize = (0, _krokusFormat.getSizeOfGroup)(formatPattern.pattern);
+  var numberOfMaximumDecimals = (0, _krokusFormat.getNumberOfDecimals)(pattern);
+  var numberOfMinimumDecimals = (0, _krokusFormat.getNumberOfRequiredDecimals)(pattern);
 
-  var integerPart = (0, _krokusMath.trunc)(roundedNumber);
-  var decimalPart = roundedNumber - integerPart;
+  var roundedNumber = (0, _krokusMath.round)(number, numberOfMaximumDecimals);
+  var integerPart = (0, _krokusMath.trunc)(number);
+  var decimalPart = (0, _krokusMath.getDecimalPart)(roundedNumber);
 
-  var numberAsString = String(integerPart);
+  var integerPartAsString = (0, _krokusFormat.formatIntegerPart)(integerPart, pattern, formatPattern.group_sep);
 
-  var length = numberAsString.length;
-  var i = length - groupSize;
-  var numberOfGroups = 0;
-  while (i > 0) {
-    numberAsString = numberAsString.substr(0, i) + formatPattern.group_sep + numberAsString.substr(i);
-    i = i - groupSize;
+  if (decimalPart === 0 && numberOfMinimumDecimals === 0) {
+    return integerPartAsString;
   }
 
-  if (numberOfDecimals > 0) {
-    var formattedDecimalPart = '';
-    if (decimalPart === 0) {
-      formattedDecimalPart = new Array(numberOfDecimals + 1).join('0');
-    } else {
-      formattedDecimalPart = String(decimalPart).substr(2).substr(0, numberOfDecimals);
-    }
-    numberAsString = numberAsString + formatPattern.decimal_sep + formattedDecimalPart;
-  }
+  var decimalPartAsString = (0, _krokusFormat.formatDecimalPart)(number, decimalPart, numberOfMaximumDecimals, numberOfMinimumDecimals, formatPattern.decimal_sep);
 
-  return numberAsString;
+  return integerPartAsString + decimalPartAsString;
 };
 
 /**

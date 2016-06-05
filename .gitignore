@@ -2,3 +2,4 @@
 node_modules/
 coverage
 core.zip
+.DS_Store

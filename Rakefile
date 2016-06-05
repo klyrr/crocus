@@ -4,13 +4,13 @@ require 'net/http'
 task :default => [:test]
 
 task :test do
-  ruby "test/currencies.rb"
+  ruby "test/rb/currencies.rb"
 end
 
-task :update do
-  ruby "src/createList.rb"
+task :update_currency do
+  ruby "src/createCurrencyJson.rb"
 end
 
-task :update_unicode do
-  ruby "src/createListFromUnicode.rb"
+task :update_locale do
+  ruby "src/createLocaleJsonFromUnicode.rb"
 end

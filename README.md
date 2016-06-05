@@ -4,7 +4,8 @@ Krokus
 [![Build Status](https://travis-ci.org/klyrr/krokus.svg?branch=master)](https://travis-ci.org/klyrr/krokus)
 [![Code Climate](https://codeclimate.com/github/klyrr/krokus/badges/gpa.svg)](https://codeclimate.com/github/klyrr/krokus)
 [![Test Coverage](https://codeclimate.com/github/klyrr/krokus/badges/coverage.svg)](https://codeclimate.com/github/klyrr/krokus/coverage)
-[![Locales 716/](https://img.shields.io/badge/locales-161/716-red.svg)](https://img.shields.io/badge/locales-161/716-red.svg)
+[![Locales 702](https://img.shields.io/badge/locales-702-green.svg)](https://img.shields.io/badge/locales-702-green.svg)
+[![Currencies 161](https://img.shields.io/badge/currencies-161-green.svg)](https://img.shields.io/badge/currencies-161-green.svg)
 
 A provider for localization patterns and an according formatter.
 
@@ -52,14 +53,15 @@ rake
 npm test
 ```
 
-#### Create the a new version of format json files
-
-```
-rake update
-```
-
 #### Generate the krokus number formatter from the es6 files.
 
 ```
 npm run compile
+```
+
+#### Create the an up-to-date version of the json files
+
+```
+rake update_currency
+rake update_locale
 ```
