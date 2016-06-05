@@ -1,6 +1,6 @@
 {
   "name": "krokus",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Provider for localization patterns and an according formatter.",
   "keywords": [
     "localization",
