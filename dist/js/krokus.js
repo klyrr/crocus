@@ -13,13 +13,14 @@ var _krokusFormat = require('./krokusFormat');
  * pattern: #,##0.00
  */
 var formatNumber = function formatNumber(number, formatPattern) {
-  if (!(0, _krokusFormat.isValidFormatPattern)(formatPattern.pattern)) {
+  var pattern = formatPattern.pattern;
+  if (!(0, _krokusFormat.isValidFormatPattern)(pattern)) {
     throw 'Given format is wrong';
   }
 
-  var numberOfDecimals = (0, _krokusFormat.getNumberOfDecimals)(formatPattern.pattern);
+  var numberOfDecimals = (0, _krokusFormat.getNumberOfDecimals)(pattern);
   var roundedNumber = (0, _krokusMath.round)(number, numberOfDecimals);
-  var groupSize = (0, _krokusFormat.getSizeOfGroup)(formatPattern.pattern);
+  var groupSize = (0, _krokusFormat.getSizeOfGroup)(pattern);
 
   var integerPart = (0, _krokusMath.trunc)(roundedNumber);
   var decimalPart = roundedNumber - integerPart;

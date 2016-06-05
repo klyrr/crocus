@@ -6,13 +6,14 @@ import {getNumberOfDecimals, getSizeOfGroup, isValidFormatPattern, replaceFormat
  * pattern: #,##0.00
  */
 const formatNumber = (number, formatPattern) => {
-  if (!isValidFormatPattern(formatPattern.pattern)) {
+  const pattern = formatPattern.pattern;
+  if (!isValidFormatPattern(pattern)) {
     throw 'Given format is wrong';
   }
 
-  const numberOfDecimals = getNumberOfDecimals(formatPattern.pattern);
+  const numberOfDecimals = getNumberOfDecimals(pattern);
   const roundedNumber = round(number, numberOfDecimals);
-  const groupSize = getSizeOfGroup(formatPattern.pattern);
+  const groupSize = getSizeOfGroup(pattern);
 
   const integerPart = trunc(roundedNumber);
   const decimalPart = roundedNumber - integerPart;

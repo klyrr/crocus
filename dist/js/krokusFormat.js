@@ -51,8 +51,14 @@ var getNumberOfDecimals = exports.getNumberOfDecimals = function getNumberOfDeci
   }
   // if currency pattern cut the currency symbol
   var posSpace = format.indexOf(' ', posDecimalSeparator);
+
+  // look also for non-breaking space
+  var posNBSpace = format.indexOf(' ', posDecimalSeparator);
+
   if (posSpace >= 0) {
     format = format.substr(0, posSpace);
+  } else if (posNBSpace >= 0) {
+    format = format.substr(0, posNBSpace);
   }
   return format.length - posDecimalSeparator - 1;
 };
