@@ -7,13 +7,13 @@ Krokus
 [![Locales 702](https://img.shields.io/badge/locales-702-green.svg)](https://img.shields.io/badge/locales-702-green.svg)
 [![Currencies 161](https://img.shields.io/badge/currencies-161-green.svg)](https://img.shields.io/badge/currencies-161-green.svg)
 
-A provider for localization patterns and an according formatter.
+A provider for localization patterns and an according number and currency formatter.
 
-In order to have the correct currency patterns in one easy to find place.
+In order to have the all currency and locale patterns in one place.
 
 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) is a standard to format currencies.
 
-The data is based on the current [CLDR29](http://cldr.unicode.org/index/downloads/cldr-29)
+The locale data is generated from [CLDR29](http://unicode.org/Public/cldr/29/core.zip) and the currency data is generated from [ISO](http://www.currency-iso.org/dam/downloads/lists/list_one.xml)
 
 Usage
 -----
@@ -29,7 +29,8 @@ const formatCurrencyPattern = {
   symbol: '€',
 };
 
-krokus.formatCurrency(10000, formatCurrencyPattern);
+> krokus.formatCurrency(10000, formatCurrencyPattern);
+10.000,00 €
 ```
 
 ### Access the generated currency and locale settings

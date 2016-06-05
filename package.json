@@ -1,10 +1,15 @@
 {
   "name": "krokus",
   "version": "0.1.0",
-  "description": "Provider for localization patterns and an according formatter.",
+  "description": "Provider for localization patterns and a number and currency formatter.",
   "keywords": [
     "localization",
+    "l10n",
     "format",
+    "numberformat",
+    "numberFormat",
+    "currencyformat",
+    "currencyFormat",
     "locale"
   ],
   "repository": {
