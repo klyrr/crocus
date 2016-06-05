@@ -16,7 +16,9 @@ describe('Currencies', function() {
       group_sep: locale_de_DE.group_sep,
       symbol: currency_EUR.symbol,
     };
-    assert.equal(krokus.formatCurrency(10000, format), '10.000,00 EUR');
+
+    assert.equal(krokus.formatNumber(20000, format), '20.000,00');
+    assert.equal(krokus.formatCurrency(20000, format), '20.000,00 EUR');
   });
 
   it('should set check the correct USD symbol', function() {

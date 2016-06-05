@@ -16,6 +16,10 @@ describe('Krokus Format', function() {
       assert.equal(getNumberOfDecimals(' ¤ #,##0.000'), 3);
       assert.equal(getNumberOfDecimals('#,##0.00'), 2);
       assert.equal(getNumberOfDecimals('#,##0'), 0);
+      assert.equal(getNumberOfDecimals('#,##0.###'), 3);
+    });
+    it('should return the number of decimals with formats that use non-breaking spaces', function() {
+      assert.equal(getNumberOfDecimals('#,##0.00 ¤'), 2)
     });
   });
   describe('getSizeOfGroup', function() {
