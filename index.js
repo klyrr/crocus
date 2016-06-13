@@ -1,5 +1,5 @@
-module.exports = {
-  krokus: require('./dist/js/krokus.js').default,
-  currencies: require('./dist/currency.json'),
-  locales: require('./dist/locale.json')
-};
+const krokus = require('./dist/js/krokus.js').default;
+krokus.currencies = require('./dist/currency.json');
+krokus.locales = require('./dist/locale.json');
+
+module.exports = krokus;

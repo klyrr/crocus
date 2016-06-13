@@ -1,4 +1,4 @@
-const krokus = require('../dist/js/krokus.js').default;
+const krokus = require('../index.js');
 const assert = require('chai').assert;
 
 describe('Krokus', function() {
@@ -29,14 +29,11 @@ describe('Krokus', function() {
     });
 
     it('should format the currencies', function () {
-      const formatCurrencyPattern = {
-        pattern: '#,##0.00 ¤',
-        decimal_sep: ',',
-        group_sep: '.',
-        symbol: '€',
-      };
+      const formatCurrencyPattern = krokus.locales.de_DE;
+      formatCurrencyPattern.pattern = formatCurrencyPattern.currency_pattern;
+      formatCurrencyPattern.symbol = '€';
 
-      assert.equal(krokus.formatCurrency(10000, formatCurrencyPattern), '10.000,00 €');
+      assert.equal(krokus.formatCurrency(10000, formatCurrencyPattern), '10.000,00 €');
     });
 
     it('should format the currencies for USD', function () {
