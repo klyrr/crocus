@@ -64,6 +64,7 @@ var formatDecimalPart = exports.formatDecimalPart = function formatDecimalPart(n
 
     return decimalSeparator + formattedDecimalPart;
   }
+
   return '';
 };
 

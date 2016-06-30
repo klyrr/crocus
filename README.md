@@ -4,8 +4,8 @@ Krokus
 [![Build Status](https://travis-ci.org/klyrr/krokus.svg?branch=master)](https://travis-ci.org/klyrr/krokus)
 [![Code Climate](https://codeclimate.com/github/klyrr/krokus/badges/gpa.svg)](https://codeclimate.com/github/klyrr/krokus)
 [![Test Coverage](https://codeclimate.com/github/klyrr/krokus/badges/coverage.svg)](https://codeclimate.com/github/klyrr/krokus/coverage)
-[![Locales 702](https://img.shields.io/badge/locales-702-green.svg)](https://img.shields.io/badge/locales-702-green.svg)
-[![Currencies 161](https://img.shields.io/badge/currencies-161-green.svg)](https://img.shields.io/badge/currencies-161-green.svg)
+[![Locales 685](https://img.shields.io/badge/locales-685-green.svg)](https://img.shields.io/badge/locales-685-green.svg)
+[![Currencies 297](https://img.shields.io/badge/currencies-297-green.svg)](https://img.shields.io/badge/currencies-297-green.svg)
 
 A provider for localization patterns and an according number and currency formatter.
 
@@ -47,10 +47,9 @@ const krokus = require('krokus');
 { decimal: '2', symbol: 'EUR' }
 ```
 
-#### Run the tests if the formats are still generating the correct formatted numbers in JS and ruby.
+#### Run the tests if the formats are still generating the expected formatted numbers in JS
 
 ```
-rake
 npm test
 ```
 
@@ -63,6 +62,5 @@ npm run compile
 #### Create the an up-to-date version of the json files
 
 ```
-rake update_currency
-rake update_locale
+rake update
 ```
