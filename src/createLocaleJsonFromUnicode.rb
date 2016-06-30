@@ -6,12 +6,18 @@ require 'zip'
 
 DOWNLOAD_UNICODE_CORE_ZIP = 'http://unicode.org/Public/cldr/29/core.zip'
 LOCALE_JSON_FILE_NAME = 'locale.json'
+CURRENCY_JSON_FILE_NAME = 'currency.json'
 
 DECIMAL_SEPARATOR = 'decimal_sep'
 GROUP_SEPARATOR = 'group_sep'
 CURRENCY_PATTERN = 'currency_pattern'
 NUMBER_PATTERN = 'number_pattern'
 
+SYMBOL = 'symbol'
+WIDE_SYMBOL = 'wideSymbol'
+ISOCODE = 'code'
+
+# locales
 LANGUAGE_PATH = 'ldml/identity/language/@type'
 TERRITORY_PATH =  'ldml/identity/territory/@type'
 DECIMAL_SEPARATOR_PATH = 'ldml/numbers/symbols[@numberSystem="latn"]/decimal'
@@ -21,8 +27,12 @@ CURRENCY_FORMAT_PATH_STANDARD = 'ldml/numbers/currencyFormats[@numberSystem="lat
 DECIMAL_FORMAT_PATH = 'ldml/numbers/decimalFormats[@numberSystem="latn"]/decimalFormatLength[not(@type)]/decimalFormat/pattern'
 DECIMAL_FORMAT_PATH_STANDARD = 'ldml/numbers/decimalFormats[@numberSystem="latn"]/decimalFormatLength/decimalFormat[type="standard"]/pattern'
 
+# currency
+CURRENCY_PATH = 'ldml/numbers/currencies/currency'
+
+@currencies = {}
 locales = {}
-language_templates = {}
+@language_templates = {}
 tmp_file = 'core.zip';
 
 def create_locale(language, territory)
@@ -30,6 +40,78 @@ def create_locale(language, territory)
     return language
   end
   language.to_s + '_' + territory.to_s
+end
+
+def get_value(element, path)
+  if element.at_xpath(path)
+    return element.xpath(path).first().content()
+  end
+  return ''
+end
+
+def merge_currencies(element)
+
+  if !element.at_xpath(CURRENCY_PATH)
+    return
+  end
+
+  element.xpath(CURRENCY_PATH).each do | currencyElement |
+    isoCode = currencyElement.xpath('@type').to_s
+    result = @currencies[isoCode] ? @currencies[isoCode] : {}
+
+    symbol = get_value(currencyElement, 'symbol[not(@alt)]')
+    symbolNarrow = get_value(currencyElement, 'symbol[@alt="narrow"]')
+
+    result[SYMBOL] = symbolNarrow.empty? ? symbol : symbolNarrow
+    result[WIDE_SYMBOL] = symbol.empty? ? symbolNarrow : symbol
+    result[ISOCODE] = isoCode
+    @currencies[isoCode] = result
+  end
+end
+
+def create_locale_element(doc, territory, language)
+  result = {}
+  if territory
+    language_template = @language_templates[language]
+    if language_template
+      result = language_template.clone()
+    end
+  end
+
+  decimal_separator = ''
+  if doc.at_xpath(DECIMAL_SEPARATOR_PATH)
+    decimal_separator = doc.xpath(DECIMAL_SEPARATOR_PATH).first().content()
+    result[DECIMAL_SEPARATOR] = decimal_separator
+  end
+
+  group_separator = ''
+  if doc.at_xpath(GROUP_SEPARATOR_PATH)
+    group_separator = doc.xpath(GROUP_SEPARATOR_PATH).first().content()
+    result[GROUP_SEPARATOR] = group_separator
+  end
+
+  decimal_formats = ''
+  if doc.at_xpath(DECIMAL_FORMAT_PATH_STANDARD)
+    decimal_formats = doc.xpath(DECIMAL_FORMAT_PATH_STANDARD).first().content()
+    result[NUMBER_PATTERN] = decimal_formats
+  elsif doc.at_xpath(DECIMAL_FORMAT_PATH)
+    decimal_formats = doc.xpath(DECIMAL_FORMAT_PATH).first().content()
+    result[NUMBER_PATTERN] = decimal_formats;
+  end
+
+  if doc.at_xpath(CURRENCY_FORMAT_PATH_STANDARD)
+    currency_format = doc.xpath(CURRENCY_FORMAT_PATH_STANDARD).first().content()
+    result[CURRENCY_PATTERN] = currency_format;
+  elsif doc.at_xpath(CURRENCY_FORMAT_PATH)
+    currency_format = doc.xpath(CURRENCY_FORMAT_PATH).first().content()
+    result[CURRENCY_PATTERN] = currency_format;
+  end
+
+  if !territory
+    @language_templates[language] = result;
+  end
+
+  result
 end
 
 if !File.exists?(tmp_file)
@@ -53,51 +135,16 @@ Zip::File.open(tmp_file) do |zipfile|
       territory = doc.xpath(TERRITORY_PATH).to_s
     end
 
-    result = {}
-    if territory
-      language_template = language_templates[language]
-      if language_template
-        result = language_template.clone()
-      end
-    end
-
-    decimal_separator = ''
-    if doc.at_xpath(DECIMAL_SEPARATOR_PATH)
-      decimal_separator = doc.xpath(DECIMAL_SEPARATOR_PATH).first().content()
-      result[DECIMAL_SEPARATOR] = decimal_separator
-    end
-
-    group_separator = ''
-    if doc.at_xpath(GROUP_SEPARATOR_PATH)
-      group_separator = doc.xpath(GROUP_SEPARATOR_PATH).first().content()
-      result[GROUP_SEPARATOR] = group_separator
-    end
-
-    decimal_formats = ''
-    if doc.at_xpath(DECIMAL_FORMAT_PATH_STANDARD)
-      decimal_formats = doc.xpath(DECIMAL_FORMAT_PATH_STANDARD).first().content()
-      result[NUMBER_PATTERN] = decimal_formats
-    elsif doc.at_xpath(DECIMAL_FORMAT_PATH)
-      decimal_formats = doc.xpath(DECIMAL_FORMAT_PATH).first().content()
-      result[NUMBER_PATTERN] = decimal_formats;
-    end
-
-    if doc.at_xpath(CURRENCY_FORMAT_PATH_STANDARD)
-      currency_format = doc.xpath(CURRENCY_FORMAT_PATH_STANDARD).first().content()
-      result[CURRENCY_PATTERN] = currency_format;
-    elsif doc.at_xpath(CURRENCY_FORMAT_PATH)
-      currency_format = doc.xpath(CURRENCY_FORMAT_PATH).first().content()
-      result[CURRENCY_PATTERN] = currency_format;
-    end
-
-    if !territory
-      language_templates[language] = result;
-    end
-
+    result = create_locale_element(doc, territory, language)
     locales[create_locale(language, territory)] = result;
+
+    merge_currencies(doc)
   end
 end
 
 File.write('dist/' + LOCALE_JSON_FILE_NAME, locales.to_json)
-
 puts 'Wrote ' + locales.length.to_s + " locales successfully."
+
+
+File.write('dist/' + CURRENCY_JSON_FILE_NAME, @currencies.to_json)
+puts 'Wrote ' + @currencies.length.to_s + " currencies successfully."
