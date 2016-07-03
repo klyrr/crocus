@@ -78,33 +78,24 @@ def create_locale_element(doc, territory, language)
     end
   end
 
-  decimal_separator = ''
   if doc.at_xpath(DECIMAL_SEPARATOR_PATH)
-    decimal_separator = doc.xpath(DECIMAL_SEPARATOR_PATH).first().content()
-    result[DECIMAL_SEPARATOR] = decimal_separator
+    result[DECIMAL_SEPARATOR] = doc.xpath(DECIMAL_SEPARATOR_PATH).first().content()
   end
 
-  group_separator = ''
   if doc.at_xpath(GROUP_SEPARATOR_PATH)
-    group_separator = doc.xpath(GROUP_SEPARATOR_PATH).first().content()
-    result[GROUP_SEPARATOR] = group_separator
+    result[GROUP_SEPARATOR] = doc.xpath(GROUP_SEPARATOR_PATH).first().content()
   end
 
-  decimal_formats = ''
   if doc.at_xpath(DECIMAL_FORMAT_PATH_STANDARD)
-    decimal_formats = doc.xpath(DECIMAL_FORMAT_PATH_STANDARD).first().content()
-    result[NUMBER_PATTERN] = decimal_formats
+    result[NUMBER_PATTERN] = doc.xpath(DECIMAL_FORMAT_PATH_STANDARD).first().content()
   elsif doc.at_xpath(DECIMAL_FORMAT_PATH)
-    decimal_formats = doc.xpath(DECIMAL_FORMAT_PATH).first().content()
-    result[NUMBER_PATTERN] = decimal_formats;
+    result[NUMBER_PATTERN] = doc.xpath(DECIMAL_FORMAT_PATH).first().content()
   end
 
   if doc.at_xpath(CURRENCY_FORMAT_PATH_STANDARD)
-    currency_format = doc.xpath(CURRENCY_FORMAT_PATH_STANDARD).first().content()
-    result[CURRENCY_PATTERN] = currency_format;
+    result[CURRENCY_PATTERN] = doc.xpath(CURRENCY_FORMAT_PATH_STANDARD).first().content()
   elsif doc.at_xpath(CURRENCY_FORMAT_PATH)
-    currency_format = doc.xpath(CURRENCY_FORMAT_PATH).first().content()
-    result[CURRENCY_PATTERN] = currency_format;
+    result[CURRENCY_PATTERN] = doc.xpath(CURRENCY_FORMAT_PATH).first().content()
   end
 
   if !territory
