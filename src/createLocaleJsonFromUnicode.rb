@@ -5,7 +5,9 @@ require 'json'
 require 'zip'
 
 DOWNLOAD_UNICODE_CORE_ZIP = 'http://unicode.org/Public/cldr/29/core.zip'
+LOCALE_JSON_FILE_NAME_MIN = 'locale.min.json'
 LOCALE_JSON_FILE_NAME = 'locale.json'
+CURRENCY_JSON_FILE_NAME_MIN = 'currency.min.json'
 CURRENCY_JSON_FILE_NAME = 'currency.json'
 
 DECIMAL_SEPARATOR = 'decimal_sep'
@@ -136,9 +138,11 @@ Zip::File.open(tmp_file) do |zipfile|
   end
 end
 
-File.write('dist/' + LOCALE_JSON_FILE_NAME, locales.to_json)
+File.write('dist/' + LOCALE_JSON_FILE_NAME_MIN, locales.to_json)
+File.write('dist/' + LOCALE_JSON_FILE_NAME, JSON.pretty_generate(locales))
 puts 'Wrote ' + locales.length.to_s + " locales successfully."
 
 
-File.write('dist/' + CURRENCY_JSON_FILE_NAME, @currencies.to_json)
+File.write('dist/' + CURRENCY_JSON_FILE_NAME_MIN, @currencies.to_json)
+File.write('dist/' + CURRENCY_JSON_FILE_NAME, JSON.pretty_generate(@currencies))
 puts 'Wrote ' + @currencies.length.to_s + " currencies successfully."
