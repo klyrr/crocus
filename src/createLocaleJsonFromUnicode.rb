@@ -69,6 +69,24 @@ def merge_currencies(element)
   end
 end
 
+def extractFormat(doc, path, alternatePath)
+  extracted_format = ''
+  if doc.at_xpath(path)
+    extracted_format = doc.xpath(path).first().content()
+  elsif doc.at_xpath(alternatePath)
+    extracted_format = doc.xpath(alternatePath).first().content()
+  end
+  extracted_format
+end
+
+def extractSeparator(doc, path)
+  group_separator = ''
+  if doc.at_xpath(path)
+    group_separator = doc.xpath(path).first().content()
+  end
+  group_separator
+end
+
 def create_locale_element(doc, territory, language)
   result = {}
   if territory
@@ -78,34 +96,10 @@ def create_locale_element(doc, territory, language)
     end
   end
 
-  decimal_separator = ''
-  if doc.at_xpath(DECIMAL_SEPARATOR_PATH)
-    decimal_separator = doc.xpath(DECIMAL_SEPARATOR_PATH).first().content()
-    result[DECIMAL_SEPARATOR] = decimal_separator
-  end
-
-  group_separator = ''
-  if doc.at_xpath(GROUP_SEPARATOR_PATH)
-    group_separator = doc.xpath(GROUP_SEPARATOR_PATH).first().content()
-    result[GROUP_SEPARATOR] = group_separator
-  end
-
-  decimal_formats = ''
-  if doc.at_xpath(DECIMAL_FORMAT_PATH_STANDARD)
-    decimal_formats = doc.xpath(DECIMAL_FORMAT_PATH_STANDARD).first().content()
-    result[NUMBER_PATTERN] = decimal_formats
-  elsif doc.at_xpath(DECIMAL_FORMAT_PATH)
-    decimal_formats = doc.xpath(DECIMAL_FORMAT_PATH).first().content()
-    result[NUMBER_PATTERN] = decimal_formats;
-  end
-
-  if doc.at_xpath(CURRENCY_FORMAT_PATH_STANDARD)
-    currency_format = doc.xpath(CURRENCY_FORMAT_PATH_STANDARD).first().content()
-    result[CURRENCY_PATTERN] = currency_format;
-  elsif doc.at_xpath(CURRENCY_FORMAT_PATH)
-    currency_format = doc.xpath(CURRENCY_FORMAT_PATH).first().content()
-    result[CURRENCY_PATTERN] = currency_format;
-  end
+  result[DECIMAL_SEPARATOR] = extractSeparator(doc, DECIMAL_SEPARATOR_PATH)
+  result[GROUP_SEPARATOR] = extractSeparator(doc, GROUP_SEPARATOR_PATH)
+  result[NUMBER_PATTERN] = extractFormat(doc, DECIMAL_FORMAT_PATH_STANDARD, DECIMAL_FORMAT_PATH)
+  result[CURRENCY_PATTERN] = extractFormat(doc, CURRENCY_FORMAT_PATH_STANDARD, CURRENCY_FORMAT_PATH)
 
   if !territory
     @language_templates[language] = result;
