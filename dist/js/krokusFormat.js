@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getSizeOfGroup = exports.getNumberOfRequiredDecimals = exports.getNumberOfDecimals = exports.replaceFormatWithNumber = exports.formatDecimalPart = exports.formatIntegerPart = exports.isValidFormatPattern = exports.CURRENCY_SYMBOL = undefined;
+exports.checkFormattedNumber = exports.getSizeOfGroup = exports.getNumberOfRequiredDecimals = exports.getNumberOfDecimals = exports.replaceFormatWithNumber = exports.formatDecimalPart = exports.formatIntegerPart = exports.isValidFormatPattern = exports.CURRENCY_SYMBOL = undefined;
 
 var _krokusMath = require('./krokusMath');
 
@@ -131,4 +131,22 @@ var getSizeOfGroup = exports.getSizeOfGroup = function getSizeOfGroup(format) {
     return format.length - posGroupSeparator - 1;
   }
   return posDecimalSeparator - posGroupSeparator - 1;
+};
+
+var checkFormattedNumber = exports.checkFormattedNumber = function checkFormattedNumber(formattedNumber, decimalSep, groupSep) {
+  // formattedNumber is a string and it has to be validated if it is a valid number
+  if (typeof formattedNumber !== 'string') {
+    return false;
+  }
+  var allowedChars = '[' + decimalSep + groupSep + '-\\d]';
+  var hasNotAllowedChars = formattedNumber.replace(new RegExp(allowedChars, 'g'), '');
+  if (hasNotAllowedChars.length > 0) {
+    return false;
+  }
+
+  var splitNumber = formattedNumber.split(decimalSep);
+  if (splitNumber.length !== 2 && splitNumber.length !== 1) {
+    return false;
+  }
+  return true;
 };

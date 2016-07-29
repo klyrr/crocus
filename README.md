@@ -33,6 +33,21 @@ const formatCurrencyPattern = {
 10.000,00 €
 ```
 
+### Use the krokus parser
+```javascript
+const krokus = require('krokus');
+
+const formatCurrencyPattern = {
+  pattern: '#,##0.00 ¤',
+  decimal_sep: ',',
+  group_sep: '.',
+  symbol: '€',
+};
+
+> krokus.parseCurrency('10.000,00 €', formatPattern);
+10000
+```
+
 ### Access the generated currency and locale settings
 ```javascript
 const krokus = require('krokus');
@@ -53,7 +68,7 @@ const krokus = require('krokus');
 npm test
 ```
 
-#### Generate the krokus number formatter from the es6 files.
+#### Generate the krokus number formatter from the es6 files
 
 ```
 npm run compile
