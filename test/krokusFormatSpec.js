@@ -5,6 +5,7 @@ const isValidFormatPattern = require('../dist/js/krokusFormat.js').isValidFormat
 const replaceFormatWithNumber = require('../dist/js/krokusFormat.js').replaceFormatWithNumber;
 const formatDecimalPart = require('../dist/js/krokusFormat.js').formatDecimalPart;
 const formatIntegerPart = require('../dist/js/krokusFormat.js').formatIntegerPart;
+const checkFormattedNumber = require('../dist/js/krokusFormat.js').checkFormattedNumber;
 
 const assert = require('chai').assert;
 
@@ -75,6 +76,23 @@ describe('Krokus Format', function() {
       assert.equal(formatDecimalPart(12000.353, 0.35, 2, 2, ','), ',35');
       assert.equal(formatDecimalPart(12000.35, 0.35, 3, 3, ','), ',350');
       assert.equal(formatDecimalPart(12000, 0, 2, 0, ','), '');
+    });
+  });
+
+  describe('checkFormattedNumber', function() {
+    it('should check the given number', function() {
+      assert.equal(checkFormattedNumber('10.000,44', '.', ','), true);
+      assert.equal(checkFormattedNumber('10 000,44', ',', ' '), true);
+      assert.equal(checkFormattedNumber('10,000.44', '.', ','), true);
+      assert.equal(checkFormattedNumber('10.000', '.', ','), true);
+      assert.equal(checkFormattedNumber('-10.000', '.', ','), true);
+      assert.equal(checkFormattedNumber('0', '.', ','), true);
+
+      assert.equal(checkFormattedNumber('10 000,44', ',', '.'), false);
+      assert.equal(checkFormattedNumber('s,33.8', '.', ','), false);
+      assert.equal(checkFormattedNumber('#,33.8', '.', ','), false);
+      assert.equal(checkFormattedNumber('hello', '.', ','), false);
+      assert.equal(checkFormattedNumber(42, '.', ','), false);
     });
   });
 });

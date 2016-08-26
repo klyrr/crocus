@@ -15,7 +15,10 @@ var _krokusFormat = require('./krokusFormat');
 var formatNumber = function formatNumber(number, formatPattern) {
   var pattern = formatPattern.pattern;
   if (!(0, _krokusFormat.isValidFormatPattern)(pattern)) {
-    throw 'Given format is wrong';
+    throw 'Given format is wrong: ' + formatPattern.pattern;
+  }
+  if (typeof number !== 'number') {
+    return number;
   }
 
   var numberOfMaximumDecimals = (0, _krokusFormat.getNumberOfDecimals)(pattern);
@@ -42,7 +45,10 @@ var formatNumber = function formatNumber(number, formatPattern) {
  */
 var formatCurrency = function formatCurrency(number, formatPattern) {
   if (!(0, _krokusFormat.isValidFormatPattern)(formatPattern.pattern)) {
-    throw 'Given format is wrong';
+    throw 'Given format is wrong: ' + formatPattern.pattern;
+  }
+  if (typeof number !== 'number') {
+    return number;
   }
 
   var formattedNumber = formatNumber(number, formatPattern);
@@ -50,9 +56,53 @@ var formatCurrency = function formatCurrency(number, formatPattern) {
   return formattedCurrency.replace(_krokusFormat.CURRENCY_SYMBOL, formatPattern.symbol);
 };
 
+/** Parsing */
+
+var parseNumber = function parseNumber(formattedNumber, formatPattern) {
+  if (!(0, _krokusFormat.isValidFormatPattern)(formatPattern.pattern)) {
+    throw 'Given format is wrong: ' + formatPattern.pattern;
+  }
+
+  if (!(0, _krokusFormat.checkFormattedNumber)(formattedNumber, formatPattern.decimal_sep, formatPattern.group_sep)) {
+    throw 'Given formatted number is wrong: ' + formattedNumber;
+  }
+
+  var decimalSep = formatPattern.decimal_sep;
+  if (formattedNumber.charAt(formattedNumber.length - 1) === decimalSep) {
+    return parseFloat(formattedNumber);
+  }
+
+  var splitNumber = formattedNumber.split(decimalSep);
+  if (splitNumber.length !== 2 && splitNumber.length !== 1) {
+    return false;
+  }
+
+  var groupSep = formatPattern.group_sep;
+  var d = splitNumber[0].split(groupSep).join('');
+
+  d += '.' + (splitNumber[1] ? splitNumber[1] : '');
+  return parseFloat(d);
+};
+
+/**
+ *
+ */
+var parseCurrency = function parseCurrency(formattedCurrency, formatPattern) {
+  if (!(0, _krokusFormat.isValidFormatPattern)(formatPattern.pattern)) {
+    throw 'Given format is wrong: ' + formatPattern.pattern;
+  }
+
+  var formattedNumber = formattedCurrency.replace(formatPattern.symbol, '');
+  formattedNumber = formattedNumber.trim();
+
+  return parseNumber(formattedNumber, formatPattern);
+};
+
 var krokus = {
   formatNumber: formatNumber,
-  formatCurrency: formatCurrency
+  formatCurrency: formatCurrency,
+  parseNumber: parseNumber,
+  parseCurrency: parseCurrency
 };
 
 exports.default = krokus;

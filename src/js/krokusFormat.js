@@ -57,7 +57,7 @@ export const formatDecimalPart = (number, decimalPart, numberOfMaximumDecimals, 
 
     return decimalSeparator + formattedDecimalPart;
   }
-  
+
   return '';
 }
 
@@ -122,4 +122,22 @@ export const getSizeOfGroup = (format) => {
     return format.length - posGroupSeparator - 1;
   }
   return posDecimalSeparator - posGroupSeparator - 1;
+}
+
+export const checkFormattedNumber = (formattedNumber, decimalSep, groupSep) => {
+  // formattedNumber is a string and it has to be validated if it is a valid number
+  if (typeof formattedNumber !== 'string') {
+      return false;
+  }
+  const allowedChars = `[${decimalSep}${groupSep}-\\d]`;
+  var hasNotAllowedChars = formattedNumber.replace(new RegExp(allowedChars, 'g'), '');
+  if (hasNotAllowedChars.length > 0) {
+      return false;
+  }
+
+  var splitNumber = formattedNumber.split(decimalSep);
+  if (splitNumber.length !== 2 && splitNumber.length !== 1) {
+      return false;
+  }
+  return true;
 }
