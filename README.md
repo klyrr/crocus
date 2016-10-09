@@ -4,8 +4,8 @@ Krokus
 [![Build Status](https://travis-ci.org/klyrr/krokus.svg?branch=master)](https://travis-ci.org/klyrr/krokus)
 [![Code Climate](https://codeclimate.com/github/klyrr/krokus/badges/gpa.svg)](https://codeclimate.com/github/klyrr/krokus)
 [![Test Coverage](https://codeclimate.com/github/klyrr/krokus/badges/coverage.svg)](https://codeclimate.com/github/klyrr/krokus/coverage)
-[![Locales 685](https://img.shields.io/badge/locales-685-green.svg)](https://img.shields.io/badge/locales-685-green.svg)
-[![Currencies 297](https://img.shields.io/badge/currencies-297-green.svg)](https://img.shields.io/badge/currencies-297-green.svg)
+[![Locales 689](https://img.shields.io/badge/locales-689-green.svg)](https://img.shields.io/badge/locales-689-green.svg)
+[![Currencies 298](https://img.shields.io/badge/currencies-298-green.svg)](https://img.shields.io/badge/currencies-298-green.svg)
 
 A provider for localization patterns and an according number and currency formatter.
 
@@ -13,7 +13,7 @@ In order to have the all currency and locale patterns in one place.
 
 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) is a standard to format currencies.
 
-The locale data is generated from [CLDR29](http://unicode.org/Public/cldr/29/core.zip) and the currency data is generated from [ISO](http://www.currency-iso.org/dam/downloads/lists/list_one.xml)
+The data is generated from [CLDR29](http://unicode.org/Public/cldr/30/core.zip).
 
 Usage
 -----
@@ -22,14 +22,14 @@ Usage
 ```javascript
 const krokus = require('krokus');
 
-const formatCurrencyPattern = {
+const formatPattern = {
   pattern: '#,##0.00 ¤',
   decimal_sep: ',',
   group_sep: '.',
   symbol: '€',
 };
 
-> krokus.formatCurrency(10000, formatCurrencyPattern);
+> krokus.formatCurrency(10000, formatPattern);
 10.000,00 €
 ```
 
@@ -37,7 +37,7 @@ const formatCurrencyPattern = {
 ```javascript
 const krokus = require('krokus');
 
-const formatCurrencyPattern = {
+const formatPattern = {
   pattern: '#,##0.00 ¤',
   decimal_sep: ',',
   group_sep: '.',
