@@ -69,7 +69,7 @@ var formatDecimalPart = exports.formatDecimalPart = function formatDecimalPart(n
 };
 
 var replaceChars = function replaceChars(pattern, charsToBeReplaced) {
-  var replacement = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
+  var replacement = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
   for (var i = 0; i < charsToBeReplaced.length; i++) {
     pattern = pattern.replace(new RegExp(charsToBeReplaced[i], 'g'), replacement).trim();
