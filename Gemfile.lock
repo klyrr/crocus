@@ -1,11 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    json (1.8.1)
-    mini_portile2 (2.0.0)
-    nokogiri (1.6.7.2)
-      mini_portile2 (~> 2.0.0.rc2)
-    rake (11.1.2)
+    json (2.1.0)
+    mini_portile2 (2.3.0)
+    nokogiri (1.8.2)
+      mini_portile2 (~> 2.3.0)
+    rake (12.3.1)
+    rubyzip (1.2.1)
 
 PLATFORMS
   ruby
@@ -14,6 +15,7 @@ DEPENDENCIES
   json
   nokogiri
   rake
+  rubyzip
 
 BUNDLED WITH
-   1.11.2
+   1.16.2
