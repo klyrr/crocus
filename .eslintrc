@@ -1,0 +1,57 @@
+{
+    "env": {
+        "commonjs": true,
+        "es6": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            2
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-extra-parens": [
+            "error",
+            "all"
+        ],
+        "class-methods-use-this": "error",
+        "complexity": [
+            "error",
+            8
+        ],
+        "consistent-return": [
+            "error",
+            {
+                "treatUndefinedAsUnspecified": false
+            }
+        ],
+        "no-unused-expressions": [
+            "error"
+        ],
+        "no-unused-vars": "error",
+        "vars-on-top": [
+            "error"
+        ],
+        "yoda": "error",
+        "no-var": "error",
+        "prefer-arrow-callback": "error",
+        "prefer-const": "error",
+        "prefer-spread": "error",
+        "sort-imports": "error"
+    }
+}

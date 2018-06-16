@@ -1,47 +1,62 @@
 import { countNumberOfDecimals } from './krokusMath';
 
+export const CURRENCY_SYMBOL = '¤';
+
 const DECIMAL_SEPARTOR = '.';
 const GROUP_SEPARTOR = ',';
-export const CURRENCY_SYMBOL = '¤';
 const ALLOWED_NUMBER_FORMAT_CHARS = ',#0;';
-const ALLOWED_GENERAL_FORMAT_CHARS = ALLOWED_NUMBER_FORMAT_CHARS + '- ' + CURRENCY_SYMBOL;
+const ALLOWED_GENERAL_FORMAT_CHARS =
+  ALLOWED_NUMBER_FORMAT_CHARS + '- ' + CURRENCY_SYMBOL;
 
-export const isValidFormatPattern = (format) => {
-  format = format.trim();
+export const isValidFormatPattern = givenFormat => {
+  let format = givenFormat.trim();
   const posGroupSeparator = format.indexOf(GROUP_SEPARTOR);
   const posDecimalSeparator = format.indexOf(DECIMAL_SEPARTOR);
+
   if (posDecimalSeparator >= 0 && posDecimalSeparator < posGroupSeparator) {
     return false;
   }
-  const posCurrencySymbol = format.indexOf(CURRENCY_SYMBOL);
 
   // currency must be first or last character of pattern or non-exiting
-  if (posCurrencySymbol !== 0 && posCurrencySymbol !== -1 && posCurrencySymbol !== (format.length -1)) {
+  const posCurrencySymbol = format.indexOf(CURRENCY_SYMBOL);
+  if (
+    posCurrencySymbol !== 0 &&
+    posCurrencySymbol !== -1 &&
+    posCurrencySymbol !== format.length - 1
+  ) {
     return false;
   }
-  let formatToBeChecked = format;
-  formatToBeChecked = formatToBeChecked.replace(/\./g, '').trim();
-  formatToBeChecked = replaceChars(formatToBeChecked, ALLOWED_GENERAL_FORMAT_CHARS);
-  return formatToBeChecked.length === 0 || formatToBeChecked === CURRENCY_SYMBOL;
-}
+
+  format = format.replace(/\./g, '').trim();
+  format = replaceChars(format, ALLOWED_GENERAL_FORMAT_CHARS);
+  return format.length === 0 || format === CURRENCY_SYMBOL;
+};
 
 export const formatIntegerPart = (integerPart, pattern, groupSeparator) => {
   let integerPartAsString = String(integerPart);
   const groupSize = getSizeOfGroup(pattern);
 
-  let length = integerPartAsString.length;
+  const length = integerPartAsString.length;
   let i = length - groupSize;
-  let numberOfGroups = 0;
 
   while (i > 0) {
-    integerPartAsString = integerPartAsString.substr(0, i) + groupSeparator + integerPartAsString.substr(i);
+    integerPartAsString =
+      integerPartAsString.substr(0, i) +
+      groupSeparator +
+      integerPartAsString.substr(i);
     i = i - groupSize;
   }
 
   return integerPartAsString;
-}
+};
 
-export const formatDecimalPart = (number, decimalPart, numberOfMaximumDecimals, numberOfMinimumDecimals, decimalSeparator) => {
+export const formatDecimalPart = (
+  number,
+  decimalPart,
+  numberOfMaximumDecimals,
+  numberOfMinimumDecimals,
+  decimalSeparator
+) => {
   if (decimalPart === 0 && numberOfMinimumDecimals === 0) {
     return '';
   }
@@ -52,38 +67,48 @@ export const formatDecimalPart = (number, decimalPart, numberOfMaximumDecimals, 
   if (numberOfMinimumDecimals > 0 || numberOfMaximumDecimals > 0) {
     const numberOfActualDecimals = countNumberOfDecimals(number);
     // cut the '0.'
-    let decimalPartString = String(decimalPart).substr(2);
-    const formattedDecimalPart = addZerosIfNeeded(numberOfMinimumDecimals, Math.min(numberOfActualDecimals, numberOfMaximumDecimals), decimalPartString);
+    const decimalPartString = String(decimalPart).substr(2);
+    const formattedDecimalPart = addZerosIfNeeded(
+      numberOfMinimumDecimals,
+      Math.min(numberOfActualDecimals, numberOfMaximumDecimals),
+      decimalPartString
+    );
 
     return decimalSeparator + formattedDecimalPart;
   }
 
   return '';
-}
+};
 
 const replaceChars = (pattern, charsToBeReplaced, replacement = '') => {
   for (let i = 0; i < charsToBeReplaced.length; i++) {
-    pattern = pattern.replace(new RegExp(charsToBeReplaced[i],'g'), replacement).trim();
+    pattern = pattern
+      .replace(new RegExp(charsToBeReplaced[i], 'g'), replacement)
+      .trim();
   }
   return pattern;
-}
+};
 
-const addZerosIfNeeded = (numberOfMinimumDecimals, numberOfActualDecimals, decimalPartString) => {
+const addZerosIfNeeded = (
+  numberOfMinimumDecimals,
+  numberOfActualDecimals,
+  decimalPartString
+) => {
   const zerosToAdd = numberOfMinimumDecimals - decimalPartString.length;
-  if (zerosToAdd <= 0) {
-    return decimalPartString.substr(0, numberOfActualDecimals);
-  }
-  return decimalPartString + new Array(zerosToAdd + 1).join('0');
-}
+
+  return zerosToAdd <= 0
+    ? decimalPartString.substr(0, numberOfActualDecimals)
+    : decimalPartString + new Array(zerosToAdd + 1).join('0');
+};
 
 export const replaceFormatWithNumber = (pattern, formattedNumber) => {
   pattern = pattern.replace(/\./g, '@').trim();
   pattern = replaceChars(pattern, ALLOWED_NUMBER_FORMAT_CHARS, '@');
   pattern = pattern.replace('@', formattedNumber);
   return pattern.split('@').join('');
-}
+};
 
-export const getNumberOfDecimals = (pattern) => {
+export const getNumberOfDecimals = pattern => {
   const posDecimalSeparator = pattern.indexOf(DECIMAL_SEPARTOR);
   if (posDecimalSeparator < 0) {
     return 0;
@@ -102,42 +127,46 @@ export const getNumberOfDecimals = (pattern) => {
   return pattern.length - posDecimalSeparator - 1;
 };
 
-export const getNumberOfRequiredDecimals = (pattern) => {
+export const getNumberOfRequiredDecimals = pattern => {
   const numberOfDecimals = getNumberOfDecimals(pattern);
   if (numberOfDecimals === 0) {
     return 0;
   }
   const posDecimalSeparator = pattern.indexOf(DECIMAL_SEPARTOR);
-  const decimals = pattern.substr(posDecimalSeparator + 1, posDecimalSeparator + numberOfDecimals);
+  const decimals = pattern.substr(
+    posDecimalSeparator + 1,
+    posDecimalSeparator + numberOfDecimals
+  );
   const firstOptionalDecimal = decimals.indexOf('#');
 
   return firstOptionalDecimal === -1 ? numberOfDecimals : firstOptionalDecimal;
-}
+};
 
-export const getSizeOfGroup = (format) => {
+export const getSizeOfGroup = format => {
   const posGroupSeparator = format.indexOf(GROUP_SEPARTOR);
   const posDecimalSeparator = format.indexOf(DECIMAL_SEPARTOR);
 
-  if (posDecimalSeparator < 0 ) {
+  if (posDecimalSeparator < 0) {
     return format.length - posGroupSeparator - 1;
   }
   return posDecimalSeparator - posGroupSeparator - 1;
-}
+};
 
 export const checkFormattedNumber = (formattedNumber, decimalSep, groupSep) => {
   // formattedNumber is a string and it has to be validated if it is a valid number
   if (typeof formattedNumber !== 'string') {
-      return false;
+    return false;
   }
   const allowedChars = `[${decimalSep}${groupSep}-\\d]`;
-  var hasNotAllowedChars = formattedNumber.replace(new RegExp(allowedChars, 'g'), '');
+  const hasNotAllowedChars = formattedNumber.replace(
+    new RegExp(allowedChars, 'g'),
+    ''
+  );
+
   if (hasNotAllowedChars.length > 0) {
-      return false;
+    return false;
   }
 
-  var splitNumber = formattedNumber.split(decimalSep);
-  if (splitNumber.length !== 2 && splitNumber.length !== 1) {
-      return false;
-  }
-  return true;
-}
+  const splitNumber = formattedNumber.split(decimalSep);
+  return splitNumber.length === 2 || splitNumber.length === 1;
+};
