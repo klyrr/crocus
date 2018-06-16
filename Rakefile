@@ -8,5 +8,5 @@ task :test do
 end
 
 task :update do
-  ruby "src/createLocaleJsonFromUnicode.rb"
+  ruby "src/rb/createLocaleJsonFromUnicode.rb"
 end
