@@ -1,6 +1,6 @@
 /* global describe it */
-const localeConfig = require('../dist/locale.json');
-const assert = require('chai').assert;
+import { assert } from 'chai';
+import localeConfig from '../src/generated/locales.json';
 
 describe('Locales', () => {
   describe('FR', () => {

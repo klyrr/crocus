@@ -1,6 +1,7 @@
 /* global describe it */
+/* eslint-disable no-irregular-whitespace */
 
-const {
+import {
   checkFormattedNumber,
   formatDecimalPart,
   formatIntegerPart,
@@ -9,9 +10,9 @@ const {
   getSizeOfGroup,
   isValidFormatPattern,
   replaceFormatWithNumber,
-} = require('../dist/js/krokusFormat.js');
+} from '../src/js/krokusFormat';
 
-const assert = require('chai').assert;
+import { assert } from 'chai';
 
 describe('Krokus Format', () => {
   describe('getNumberOfDecimals', () => {
@@ -30,6 +31,7 @@ describe('Krokus Format', () => {
       assert.equal(getNumberOfDecimals('#,##0.00 ¤'), 2);
     });
   });
+
   describe('getNumberOfRequiredDecimals', () => {
     it('should return the numbers of required decimals', () => {
       assert.equal(getNumberOfRequiredDecimals('#,##0.00'), 2);
@@ -38,6 +40,7 @@ describe('Krokus Format', () => {
       assert.equal(getNumberOfRequiredDecimals('#,##0.###'), 0);
     });
   });
+
   describe('getSizeOfGroup', () => {
     it('should return the size of the group', () => {
       assert.equal(getSizeOfGroup('#,##0.00'), 3);
@@ -46,6 +49,7 @@ describe('Krokus Format', () => {
       //    assert.equal(getSizeOfGroup('¤ #,##,##0.00'), 3);
     });
   });
+
   describe('isValidFormatPattern', () => {
     it('should return the number of decimals from the format', () => {
       assert.equal(isValidFormatPattern('#,##0.00 ¤'), true);
@@ -61,6 +65,7 @@ describe('Krokus Format', () => {
       assert.equal(isValidFormatPattern('#,33.8'), false);
     });
   });
+
   describe('replaceFormatWithNumber', () => {
     it('should replace the number in the given format', () => {
       assert.equal(replaceFormatWithNumber('#,##0.00', '10.000'), '10.000');
@@ -70,12 +75,14 @@ describe('Krokus Format', () => {
       );
     });
   });
+
   describe('formatIntegerPart', () => {
     it('should replace the number in the given format', () => {
       assert.equal(formatIntegerPart(120000, '#,##0.00', 'x'), '120x000');
       assert.equal(formatIntegerPart(0, '#,##0.0000 ¤', 'x'), '0');
     });
   });
+
   describe('formatDecimalPart', () => {
     it('should replace the number in the given format', () => {
       // number, decimalPart, numberOfMaximumDecimals, numberOfMinimumDecimals, decimalSeparator
@@ -87,14 +94,16 @@ describe('Krokus Format', () => {
   });
 
   describe('checkFormattedNumber', () => {
-    it('should check the given number', () => {
+    it('should validate the given number', () => {
       assert.equal(checkFormattedNumber('10.000,44', '.', ','), true);
       assert.equal(checkFormattedNumber('10 000,44', ',', ' '), true);
       assert.equal(checkFormattedNumber('10,000.44', '.', ','), true);
       assert.equal(checkFormattedNumber('10.000', '.', ','), true);
       assert.equal(checkFormattedNumber('-10.000', '.', ','), true);
+      assert.equal(checkFormattedNumber('-10.000,54', '.', ','), true);
       assert.equal(checkFormattedNumber('0', '.', ','), true);
-
+    });
+    it('should return false', () => {
       assert.equal(checkFormattedNumber('10 000,44', ',', '.'), false);
       assert.equal(checkFormattedNumber('s,33.8', '.', ','), false);
       assert.equal(checkFormattedNumber('#,33.8', '.', ','), false);
