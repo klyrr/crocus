@@ -1,17 +1,18 @@
 rvm:
 - 2.2
 node_js:
-- '5'
+- '8'
 install:
 - bundle install
 - npm install
 script:
-- rake
 - npm test
 deploy:
+  tag: next
   provider: npm
+  email: tina.umlandt@gmail.com
   api_key:
-    secure: aYqQbsHou1EJuhFqCVyxqbl0blguM+VDuwfcvmrWEGjKX/5fBXnmgZpJkKFeZayj9HR+tH77isqY0cz39fLkEfxxX0mlymSstA1bd5Sby8rg1jOJq6GWYV+MkSitavT6YFVrWNnAntEGUo12wqlwe2sY5COG6VtFCLC0UA7EdiRd/CcXq6NtqubWpasLigfqURBTOqQikEgfRUwnGkI+7gLzNVenPy6vA1Rx5Kk0P/+5a14t2W1ldScr+EK1rRGhD1VOLz7xxz9IZub7ChNRWmNye8ZYhWPh80IHrn10/BPQNIxejcgZxC3VC/4pHKFoyMVPd6jH51ithvGMkOKuK98CsoixNLD6XYTFKjzl6VUgVsPqgeCMVJmypi0t+zkDfh73FXRJt4sIsUusKxllbXZltcLYTQXDV8eN2/3k+eT1/7MB/CPrjW+/ebHjWe+aLeAIiuzH3VuK9y7yJUcA4hOTYigW5Q7N2siyEh8a3a/zdvcsSUQmaBp5ccSCrSoB9nV/xDaYLqb6P2941tg2qsAKKmA8Qa7Qn3zoRdTVDYsp3C4b4u9yunDKEZ7nSt6fgLypa9nkzwsi31u7zZ8ey/PzdM5hDO4Zg0AnWLIwJCxTIwxrTy/08eAGtkxN9m+WKSQSqIkQygVkXfsZEeuBFdzc8ndLqlFqxrzvGIiUkmQ=
+    secure: 04W5ymOr3usbzAQEw1Fl1QiudJ9j1HQ0cFgWnxqbUMAtI7dZPo635nM5/0jiJdLwc7x4hTXBPtmo8y5IujzfgRN4d4mcG2QZ2+4wiI5nExYZhF6xS0YheWpPYn9E5uG5FomBbwsLPEDo6eW1fYTs71bxCfi5s+WDWw+bSjkmDVJNqmAc5A7S9dZFPkaDbofGqnk5ubJZG4VjjJtNqo+1N9XINysIavmmhEuN1pd+jwTlcg9MkmpLI2N+6uigHS3AClwE70UBpA4p21Hfy0OmdPghXLN+jOnl69CyAUsNtQ/knEp3Tc7VVHOXvo+9RPHGRf8xN4HJVAnH3Kt9LBeh/HCvUo0aecRDzL/C3kRmt9fyrlNtligm+b40e677jiqnP3RPv1vkVAhRuw3+ib+OT+1dE/F7F3dSUyKcPnzkgAJ7HO/kP2eJlw/me6jBuPMTKS3pbDtlpgrfpAi8SUoDmN3wh7kv//feabSKhql63ddhUCUhw2QmsEwZ3soA9+qqZzqdeX7ZBLlT1GkCHlUt9CPGAAEmLsDzPvwSCB86JqIqTq/vufxEOghLA0QioH3W+aobermvAeY/mBIDJ39M33zbLw5znWJfXTeXCxwFckS2MAXMdPIwwfr7B2EAylohPGwWId8WzohWvuarJozeELzvHuF1rNKqRKYVQtnpHk0=
   on:
     tags: true
     repo: klyrr/krokus

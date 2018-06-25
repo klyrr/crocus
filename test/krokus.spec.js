@@ -1,13 +1,13 @@
 /* global describe it */
-const {
+
+import {
   formatCurrency,
   formatNumber,
-  locales,
   parseCurrency,
   parseNumber,
-} = require('../index.js');
-
-const assert = require('chai').assert;
+} from '../src/js/krokus';
+import { assert } from 'chai';
+import locales from '../src/generated/locales.json';
 
 describe('krokus', () => {
   describe('formatter', () => {
@@ -17,11 +17,11 @@ describe('krokus', () => {
         decimal_sep: ',',
         group_sep: '.',
       };
-
       assert.equal(formatNumber(10000, formatPattern), '10.000,00');
       assert.equal(formatNumber(200000000, formatPattern), '200.000.000,00');
       assert.equal(formatNumber(432.55, formatPattern), '432,55');
       assert.equal(formatNumber(432.5, formatPattern), '432,50');
+      // assert.equal(formatNumber(-432.5, formatPattern), '-432,50');
     });
 
     it('should format the numbers without trailing numbers', () => {
@@ -35,6 +35,7 @@ describe('krokus', () => {
       assert.equal(formatNumber(200000000, formatPattern), '200.000.000');
       assert.equal(formatNumber(432.55, formatPattern), '432,55');
       assert.equal(formatNumber(432.5577, formatPattern), '432,558');
+      // assert.equal(formatNumber(-432.5577, formatPattern), '432,558');
     });
 
     it('should not format strings only numbers', () => {

@@ -14,7 +14,7 @@ import { getDecimalPart, round, trunc } from './krokusMath';
  * formatPattern = { pattern, decimal_sep, group_sep }
  * pattern: #,##0.00
  */
-const formatNumber = (number, formatPattern) => {
+export const formatNumber = (number, formatPattern) => {
   const pattern = formatPattern.pattern;
   if (!isValidFormatPattern(pattern)) {
     throw 'Given format is wrong: ' + formatPattern.pattern;
@@ -55,7 +55,7 @@ const formatNumber = (number, formatPattern) => {
  * formatPattern = { pattern, decimal_sep, group_sep, symbol }
  * pattern: #,##0.00
  */
-const formatCurrency = (number, formatPattern) => {
+export const formatCurrency = (number, formatPattern) => {
   if (!isValidFormatPattern(formatPattern.pattern)) {
     throw 'Given format is wrong: ' + formatPattern.pattern;
   }
@@ -73,7 +73,7 @@ const formatCurrency = (number, formatPattern) => {
 
 /** Parsing */
 
-const parseNumber = (formattedNumber, formatPattern) => {
+export const parseNumber = (formattedNumber, formatPattern) => {
   if (!isValidFormatPattern(formatPattern.pattern)) {
     throw 'Given format is wrong: ' + formatPattern.pattern;
   }
@@ -106,9 +106,10 @@ const parseNumber = (formattedNumber, formatPattern) => {
 };
 
 /**
- *
+ * formatPattern = { pattern, decimal_sep, group_sep }
+ * pattern: #,##0.00
  */
-const parseCurrency = (formattedCurrency, formatPattern) => {
+export const parseCurrency = (formattedCurrency, formatPattern) => {
   if (!isValidFormatPattern(formatPattern.pattern)) {
     throw 'Given format is wrong: ' + formatPattern.pattern;
   }
@@ -119,12 +120,3 @@ const parseCurrency = (formattedCurrency, formatPattern) => {
 
   return parseNumber(formattedNumber, formatPattern);
 };
-
-const krokus = {
-  formatNumber,
-  formatCurrency,
-  parseNumber,
-  parseCurrency,
-};
-
-export default krokus;

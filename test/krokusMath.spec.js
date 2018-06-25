@@ -1,13 +1,13 @@
 /* global describe it */
 
-const {
+import {
   countNumberOfDecimals,
   getDecimalPart,
   round,
   trunc,
-} = require('../dist/js/krokusMath.js');
+} from '../src/js/krokusMath';
 
-const assert = require('chai').assert;
+import { assert } from 'chai';
 
 describe('Krokus Math', () => {
   describe('round', () => {
@@ -18,6 +18,7 @@ describe('Krokus Math', () => {
       assert.equal(round(23.44, 1), 23.4);
       assert.equal(round(23.44, 4), 23.44);
       assert.equal(round(432.5579, 3), 432.558);
+      assert.equal(round(-432.5579, 3), -432.558);
     });
   });
 
@@ -33,6 +34,7 @@ describe('Krokus Math', () => {
       assert.equal(countNumberOfDecimals(23.44), 2);
       assert.equal(countNumberOfDecimals(23), 0);
       assert.equal(countNumberOfDecimals(23.76262), 5);
+      assert.equal(countNumberOfDecimals(-23.76262), 5);
     });
   });
 
@@ -41,6 +43,7 @@ describe('Krokus Math', () => {
       assert.equal(getDecimalPart(23.44), 0.44);
       assert.equal(getDecimalPart(23), 0);
       assert.equal(getDecimalPart(23.76262), 0.76262);
+      assert.equal(getDecimalPart(-23.76262), 0.76262);
     });
   });
 });
