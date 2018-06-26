@@ -1,5 +1,5 @@
 /* global describe, it */
-import { AED, EUR, INR, USD } from '../src/generated/currencies.json';
+import { AED, EUR, INR, JPY, USD } from '../src/generated/currencies.json';
 import { formatCurrency, formatNumber } from '../src/js/krokus';
 import { assert } from 'chai';
 import { de } from '../src/generated/locales.json';
@@ -41,5 +41,11 @@ describe('Currencies', () => {
     assert.equal(INR.symbol, '₹');
     assert.equal(INR.wideSymbol, '₹');
     assert.equal(INR.code, 'INR');
+  });
+
+  it('should have the expected JPY symbol', () => {
+    assert.equal(JPY.symbol, '¥');
+    assert.equal(JPY.wideSymbol, 'JP¥');
+    assert.equal(JPY.code, 'JPY');
   });
 });

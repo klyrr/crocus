@@ -2,8 +2,8 @@ Krokus
 =====================
 
 [![Build Status](https://travis-ci.org/klyrr/krokus.svg?branch=master)](https://travis-ci.org/klyrr/krokus)
-[![Locales 689](https://img.shields.io/badge/locales-689-green.svg)](https://img.shields.io/badge/locales-689-green.svg)
-[![Currencies 298](https://img.shields.io/badge/currencies-298-green.svg)](https://img.shields.io/badge/currencies-298-green.svg)
+[![Locales 703](https://img.shields.io/badge/locales-703-green.svg)](https://img.shields.io/badge/locales-703-green.svg)
+[![Currencies 301](https://img.shields.io/badge/currencies-301-green.svg)](https://img.shields.io/badge/currencies-301-green.svg)
 
 A provider for localization patterns and a number and currency formatter and parser.
 
@@ -11,7 +11,7 @@ In order to have the all currency and locale patterns in one place.
 
 [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) is a standard to format currencies.
 
-The data is generated from [CLDR30](http://unicode.org/Public/cldr/30/core.zip).
+The data is generated from [CLDR33](http://unicode.org/Public/cldr/33/core.zip).
 
 ## Installation
 

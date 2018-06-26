@@ -1,5 +1,7 @@
 .bundle
-node_modules/
+node_modules
 coverage
 core.zip
+.nyc_output
 .DS_Store
+isolate-*
