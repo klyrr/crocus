@@ -4,7 +4,7 @@ require 'nokogiri'
 require 'json'
 require 'zip'
 
-DOWNLOAD_UNICODE_CORE_ZIP = 'http://unicode.org/Public/cldr/29/core.zip'
+DOWNLOAD_UNICODE_CORE_ZIP = 'http://unicode.org/Public/cldr/33/core.zip'
 LOCALE_JSON_FILE_NAME = 'locales.json'
 CURRENCY_JSON_FILE_NAME = 'currencies.json'
 
