@@ -14,8 +14,11 @@ In order to have the all currency and locale patterns in one place.
 The data is generated from [CLDR33](http://unicode.org/Public/cldr/33/core.zip).
 
 ## Installation
+### npm
+`npm install --save krokus`
 
-`npm install --save-dev krokus`
+### yarn
+`yarn add krokus`
 
 -----
 
