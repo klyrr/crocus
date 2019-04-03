@@ -1,17 +1,22 @@
-{   
-    "presets": [
+{
+  "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "targets": {
-          "browsers": [ "> 0.25%", "not dead"]
+          "browsers": [
+            "> 0.25%",
+            "not dead"
+          ]
         }
       }
     ]
-  ], 
+  ],
   "env": {
-    "test":{
-      "presets":["env"]
+    "test": {
+      "presets": [
+        "@babel/preset-env"
+      ]
     }
-  } 
+  }
 }

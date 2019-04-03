@@ -99,17 +99,17 @@ export const formatCurrency = (amount, locale, currency) => {
 #### Run the tests if the formats are still generating the expected formatted numbers in JS
 
 ```
-npm install
+yarn
 
-npm test
+yarn test
 ```
 
 #### Generate the krokus number formatter from the es6 files
 
 ```
-npm install
+yarn
 
-npm run compile
+yarn run compile
 ```
 
 #### Create the up-to-date version of the json files

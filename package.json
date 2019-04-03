@@ -19,26 +19,23 @@
   "license": "MIT",
   "scripts": {
     "compile": "webpack",
-    "test": "nyc mocha",
-    "coverage": "istanbul cover  _mocha -- -R spec",
+    "test": "mocha",
     "format": "prettier-eslint --write --prettier-last \"**/*.js\""
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "1.7.0",
-    "babel-register": "^6.26.0",
-    "chai": "^4.1.2",
-    "eslint": "^5.0.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.2.0",
-    "nyc": "^12.0.2",
-    "prettier": "^1.13.5",
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/register": "^7.4.0",
+    "babel-loader": "^8.0.5",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "mocha": "^6.0.2",
+    "prettier": "^1.16.4",
     "prettier-eslint": "^8.8.2",
     "prettier-eslint-cli": "^4.7.1",
-    "webpack": "^4.12.1",
-    "webpack-cli": "^3.0.8"
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   },
   "bugs": {
     "url": "https://github.com/klyrr/krokus/issues"
