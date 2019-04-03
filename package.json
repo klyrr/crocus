@@ -19,7 +19,7 @@
   "license": "MIT",
   "scripts": {
     "compile": "webpack",
-    "test": "mocha",
+    "test": "c8 mocha",
     "format": "prettier-eslint --write --prettier-last \"**/*.js\""
   },
   "devDependencies": {
@@ -28,6 +28,7 @@
     "@babel/preset-env": "^7.4.3",
     "@babel/register": "^7.4.0",
     "babel-loader": "^8.0.5",
+    "c8": "^3.4.0",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "mocha": "^6.0.2",
