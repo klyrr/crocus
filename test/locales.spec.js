@@ -5,7 +5,7 @@ import localeConfig from '../src/generated/locales.json';
 describe('Locales', () => {
   describe('FR', () => {
     it('should have the expected patterns for fr', () => {
-      assert.equal(localeConfig.fr.group_sep, ' ');
+      assert.equal(localeConfig.fr.group_sep, ' ');
       assert.equal(localeConfig.fr.decimal_sep, ',');
       assert.equal(localeConfig.fr.number_pattern, '#,##0.###');
       assert.equal(localeConfig.fr.currency_pattern, '#,##0.00 ¤');
@@ -17,7 +17,7 @@ describe('Locales', () => {
       assert.equal(localeConfig.fr_CA.currency_pattern, '#,##0.00 ¤');
     });
     it('should have the expected patterns for fr_CH', () => {
-      assert.equal(localeConfig.fr_CH.group_sep, ' ');
+      assert.equal(localeConfig.fr_CH.group_sep,' ');
       assert.equal(localeConfig.fr_CH.decimal_sep, ',');
       assert.equal(localeConfig.fr_CH.number_pattern, '#,##0.###');
       assert.equal(
