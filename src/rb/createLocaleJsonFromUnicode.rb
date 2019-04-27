@@ -4,7 +4,7 @@ require 'nokogiri'
 require 'json'
 require 'zip'
 
-DOWNLOAD_UNICODE_CORE_ZIP = 'http://unicode.org/Public/cldr/33/core.zip'
+DOWNLOAD_UNICODE_CORE_ZIP = 'https://unicode.org/Public/cldr/34/core.zip'
 LOCALE_JSON_FILE_NAME = 'locales.json'
 CURRENCY_JSON_FILE_NAME = 'currencies.json'
 
@@ -106,7 +106,7 @@ def create_locale_element(doc, territory, language)
 end
 
 if !File.exists?(tmp_file)
-  puts tmp_file + ' does not exists locally. We have to download it.'
+  puts tmp_file + ' does not exist locally. We have to download it.'
   open(tmp_file, 'wb') do |file|
     file << open(DOWNLOAD_UNICODE_CORE_ZIP).read
   end

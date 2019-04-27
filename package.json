@@ -20,6 +20,7 @@
   "scripts": {
     "compile": "webpack",
     "test": "c8 mocha",
+    "test:watch": "c8 mocha --watch",
     "format": "prettier-eslint --write --prettier-last \"**/*.js\""
   },
   "devDependencies": {
